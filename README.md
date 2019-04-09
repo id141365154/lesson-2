@@ -15,7 +15,7 @@
 
 - полключить react-router v5.0
 - сделать 4 страницу модальным окном, открывающимся по клику на селект
-- можно использовать библиотеку react-roluter-modal для анимаций
+- можно использовать библиотеку react-router-modal для анимаций
 
 ### Ссылки:
 formik https://github.com/jaredpalmer/formik
