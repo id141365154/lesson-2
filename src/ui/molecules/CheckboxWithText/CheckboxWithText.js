@@ -15,6 +15,7 @@ const Container = styled.div`
 export const CheckboxWithText = ({
   children,
   value,
+  name,
   onPress,
   error,
   tip,
@@ -24,6 +25,7 @@ export const CheckboxWithText = ({
   <Container onClick={typeof children === 'string' ? onPress : undefined}>
     <CheckboxField
       value={value}
+      name={name}
       error={error}
       disabled={disabled}
       onPress={typeof children === 'string' ? undefined : onPress}
@@ -50,6 +52,7 @@ export const CheckboxWithText = ({
 CheckboxWithText.propTypes = {
   children: PropTypes.node,
   value: PropTypes.bool,
+  name:PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired,
   error: PropTypes.string,
   tip: PropTypes.string,

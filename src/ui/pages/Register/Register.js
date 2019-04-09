@@ -9,30 +9,63 @@ const Wrapper = styled.div`
   padding: ${({ theme }) => theme.paddings.main}px;
 `
 
-export const Register = ()=>{
+export const Register = ({values, handleChange, handelBlur, errors})=>{
+  console.log('errors', errors)
+
   return (
     <PageTemplate>
       <Header title="Регистрация" icon={'back'} />
       <Flex1>
         <Wrapper>
           <HBox height={theme.paddings.half} />
-          <TextField label={'Ваше имя'} placeholder={'Иван'}/>
+          <TextField
+            name={'user-name'}
+            label={'Ваше имя'}
+            placeholder={'Иван'}
+          />
           <HBox />
-          <TextField label={'Ваша фамилия'} placeholder={'Иванов'}/>
+          <TextField
+            name={'user-surname'}
+            label={'Ваша фамилия'}
+            placeholder={'Иванов'}
+          />
           <HBox />
-          <TextField label={'Номер телефона'} placeholder={'XXXXXXXXXX'} startAdornment={'+7'}/>
+          <TextField
+            name={'user-phone'}
+            label={'Номер телефона'}
+            startAdornment={'+7'}
+            placeholder={'XXXXXXXXXX'}
+          />
           <HBox />
-          <TextField label={'Email'} placeholder={'simple@mail.com'}/>
+          <TextField
+            name={'user-email'}
+            label={'Email'}
+            placeholder={'simple@mail.com'}
+            onChange={handleChange}
+            onBlur={handelBlur}
+            error={errors['user-email']}
+            value={values['user-email']}
+          />
           <HBox />
-          <SexField name={'user-sex'} label={'Пол'}/>
+          <SexField
+            name={'user-sex'}
+            label={'Пол'}
+          />
           <HBox />
-          <TextareaField label={'Немного о себе'} placeholder={'Ваше хобби, любимые книги и т.д.'}/>
+          <TextareaField
+            name={'user-bio'}
+            label={'Немного о себе'}
+            placeholder={'Ваше хобби, любимые книги и т.д.'}
+          />
           <HBox />
-          <CheckboxWithText children={'Со всеми условиями согласен вторая строка'} />
+          <CheckboxWithText
+            name={'user-agree'}
+            children={'Со всеми условиями согласен вторая строка'}
+          />
           <HBox />
-          <ButtonAccent children={'Отправить'} disabled={true}/>
-
-
+          <ButtonAccent
+            children={'Отправить'}
+            disabled={true}/>
         </Wrapper>
       </Flex1>
     </PageTemplate>

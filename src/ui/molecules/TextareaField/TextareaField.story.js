@@ -10,6 +10,7 @@ storiesOf('ui/molecules', module).add(
   withState({ value: '' })(({ store }) => (
     <TextareaField
       value={store.state.value}
+      name={text('name', 'user-bio')}
       disabled={boolean('disabled', false)}
       label={text('label', 'Label')}
       placeholder={text(
