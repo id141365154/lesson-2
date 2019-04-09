@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withTheme, styled, theme } from '@ui/theme'
+import { HBox} from '@ui/atoms'
+import { InputError, InputTip } from '@ui/atoms/Typography'
 
 
 
@@ -12,6 +14,7 @@ const Container = styled.label`
   line-height:24px;
   outline:none;
   border-bottom: 1px solid transparent;
+  color : ${({disabled})=>(disabled ? theme.pallete.whiteSmoke : theme.pallete.gray2)}
   :focus{border-bottom:1px solid #eee;}
 `
 
@@ -21,7 +24,7 @@ const RadioBox = styled.div`
   top:1px;
   width:20px;
   height:20px;
-  border:1px solid ${theme.pallete.controlsBorder}
+  border:1px solid ${({disabled})=>(disabled ? theme.pallete.whiteSmoke : theme.pallete.controlsBorder)}
   border-radius:50%;
 `
 const CheckStyled = styled.div`
@@ -42,10 +45,10 @@ const HtmlRadio = styled.input`
 `
 
 
-const Check = ({value}) => (
+const Check = ({value, disabled}) => (
   <CheckStyled value={value}>
     <svg width={24} height={24} fill="none">
-      <circle cx={12} cy={12} r={10} fill="#FF3F6E" />
+      <circle cx={12} cy={12} r={10} fill={disabled ? theme.pallete.whiteSmoke : theme.pallete.radicalRed} />
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -62,6 +65,7 @@ export const RadioField = withTheme(
      name,
      labelText,
      error,
+     tip,
      disabled,
      onClick,
      onBlur,
@@ -97,16 +101,19 @@ export const RadioField = withTheme(
         <div>
           <Container
             tabIndex={'0'}
+            disabled={disabled}
             onClick={onClickHandler}
             onFocus={onFocusHandler}
             onBlur={onBlurHandler}
             onKeyPress={onKeyHandler}
           >
-            <RadioBox/>
-            <HtmlRadio name={name} type={"radio"} checked={ value ? value : null }/>
-            <Check/>
+            <RadioBox disabled={disabled}/>
+            <HtmlRadio disabled={disabled} name={name} type={"radio"} checked={ value ? value : null }/>
+            <Check disabled={disabled}/>
             {labelText}
           </Container>
+          <HBox height={theme.paddings.half} />
+          {error ? <InputError>{error}</InputError> : <InputTip>{tip}</InputTip>}
         </div>
       )
   },
@@ -117,6 +124,7 @@ RadioField.propTypes = {
   name: PropTypes.string,
   labelText: PropTypes.string,
   error: PropTypes.string,
+  tip: PropTypes.string,
   disabled: PropTypes.bool,
   onClick: PropTypes.func,
   onBlur: PropTypes.func,
