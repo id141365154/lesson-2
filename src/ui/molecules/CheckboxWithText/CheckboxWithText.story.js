@@ -8,6 +8,7 @@ storiesOf('ui/molecules', module).add('CheckboxWithText', () => (
   <CheckboxWithText
     value={boolean('value', false)}
     error={text('error', '')}
+    tip={text('tip', '')}
     disabled={boolean('disabled', false)}
     onPress={action('onPress')}
     children={text('children', 'Со всеми условиями согласен')}

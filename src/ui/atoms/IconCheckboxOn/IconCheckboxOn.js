@@ -13,5 +13,5 @@ export const IconCheckboxOn = ({ color }) => (
 )
 
 IconCheckboxOn.propTypes = {
-  color: PropTypes.color,
+  color: PropTypes.string,
 }

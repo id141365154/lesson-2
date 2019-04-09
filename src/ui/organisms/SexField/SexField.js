@@ -25,7 +25,7 @@ export const SexField = withTheme(
   }) => (
     <FieldContainer>
       <FormLabel>{label}</FormLabel>
-      <HBox height={theme.paddings.double} />
+      <HBox />
       <Row>
           <RadioField
             labelText={'муж.'}

@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { styled } from '@ui/theme'
-import { VBox, Flex1 } from '@ui/atoms'
-import { Body2 } from '@ui/atoms/Typography'
+import { VBox, HBox, Flex1 } from '@ui/atoms'
+import { Body2,  InputError, InputTip } from '@ui/atoms/Typography'
 import { CheckboxField } from '@ui/molecules'
 
 const Container = styled.div`
@@ -17,8 +17,10 @@ export const CheckboxWithText = ({
   value,
   onPress,
   error,
+  tip,
   disabled,
 }) => (
+  <>
   <Container onClick={typeof children === 'string' ? onPress : undefined}>
     <CheckboxField
       value={value}
@@ -34,7 +36,15 @@ export const CheckboxWithText = ({
     ) : (
       children
     )}
+
   </Container>
+  {error
+    ? <InputError>{error}</InputError>
+    : tip
+      ? <InputTip>{tip}</InputTip>
+      : <HBox/>
+  }
+  </>
 )
 
 CheckboxWithText.propTypes = {
@@ -42,5 +52,6 @@ CheckboxWithText.propTypes = {
   value: PropTypes.bool,
   onPress: PropTypes.func.isRequired,
   error: PropTypes.string,
+  tip: PropTypes.string,
   disabled: PropTypes.bool,
 }

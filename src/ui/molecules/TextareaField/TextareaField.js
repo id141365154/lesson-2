@@ -75,11 +75,12 @@ export const TextareaField = props => {
         <VBox width={theme.paddings.main} />
       </FieldContainer>
       <HBox height={theme.paddings.half} />
-      {props.error ? (
-        <InputError>{props.error}</InputError>
-      ) : (
-        <InputTip>{props.tip}</InputTip>
-      )}
+      {props.error
+       ? <InputError>{props.error}</InputError>
+       : props.tip
+        ? <InputTip>{props.tip}</InputTip>
+        : <HBox/>
+      }
     </Container>
   )
 }

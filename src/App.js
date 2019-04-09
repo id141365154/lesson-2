@@ -1,22 +1,30 @@
 import React, { Component } from 'react'
 import { Normalize } from 'styled-normalize'
 
-import { ThemeProvider, theme } from '@ui/theme'
 import { Body2 } from '@ui/atoms/Typography'
-import { GlobalStyles } from '@ui/theme'
+import { theme, GlobalStyles, styled, ThemeProvider } from '@ui/theme'
+import { Register } from '@ui/pages'
+
+const InnerContainer = styled.div`
+  background-color: white;
+  flex: 1;
+  max-width: 414px;
+`
 
 class App extends Component {
   render() {
     return (
-      <ThemeProvider theme={theme}>
-        <>
-          <Normalize />
-          <GlobalStyles />
-          <div className="App">
-            <Body2>lesson1</Body2>
-          </div>
-        </>
-      </ThemeProvider>
+      <InnerContainer>
+        <ThemeProvider theme={theme}>
+          <>
+            <Normalize />
+            <GlobalStyles />
+            <>
+              <Register />
+            </>
+          </>
+        </ThemeProvider>
+      </InnerContainer>
     )
   }
 }
