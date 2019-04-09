@@ -13,6 +13,7 @@ export const theme = {
     successColor: '#27AE60',
     lola: '#BAB3C0',
     divider: '#E6E4E8',
+    controlsBorder: '#D3D3D3'
   },
   paddings: {
     main: 16,
