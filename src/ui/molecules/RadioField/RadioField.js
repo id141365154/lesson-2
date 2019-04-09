@@ -61,7 +61,8 @@ const Check = ({value, disabled}) => (
 
 
 export const RadioField = withTheme(
-  ({ value = false,
+  ({ theme,
+     value = false,
      name,
      labelText,
      error,
