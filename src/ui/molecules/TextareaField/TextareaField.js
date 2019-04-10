@@ -69,7 +69,7 @@ export const TextareaField = props => {
           value={props.value}
           placeholder={props.placeholder}
           disabled={props.disabled}
-          onChange={e => props.onChange(e.currentTarget.value)}
+          onChange={e => props.onChange(e)}
           onFocus={handleFocus}
           onBlur={handleBlur}
         />

@@ -49,13 +49,13 @@ const registerFormInitialValues = {
 let yup = require('yup')
 
 let schema = yup.object().shape({
-  'user-name': yup.string().min(3).max(20).required(),
-  'user-surname': yup.string().min(3).max(20).required(),
-  'user-email': yup.string().email(),
-  'user-phone': yup.string().min(10).max(10).matches(/[0-9]$/i).required(),
-  'user-sex': yup.boolean().required(),
-  'user-bio': yup.string().max(200),
-  'user-agree': yup.boolean().required(),
+  'user-name': yup.string().min(3, 'Минимум 3 символа').max(20, 'Максимум 20 символов').required('Поле обязательно'),
+  'user-surname': yup.string().min(3, 'Минимум 3 символа').max(20, 'Максимум 20 символов').required('Поле обязательно'),
+  'user-email': yup.string().email('Неккорректный E-mail адрес'),
+  'user-phone': yup.string().min(10, 'Минимум 10 цифр').max(10, 'Максимум 10 цифр').matches(/[0-9]$/i).required('Поле обязательно'),
+  'user-sex': yup.boolean().required('Поле обязательно'),
+  'user-bio': yup.string().max(200, 'Слишком длинно, укоротите до 200 символов'),
+  'user-agree': yup.boolean().required('Поле обязательно'),
 })
 
 
