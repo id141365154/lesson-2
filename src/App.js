@@ -44,6 +44,7 @@ const registerFormInitialValues = {
   'user-phone': '',
   'user-sex': '',
   'user-bio': '',
+  'user-agree': false,
 }
 
 let yup = require('yup')
@@ -51,11 +52,11 @@ let yup = require('yup')
 let schema = yup.object().shape({
   'user-name': yup.string().min(3, 'Минимум 3 символа').max(20, 'Максимум 20 символов').required('Поле обязательно'),
   'user-surname': yup.string().min(3, 'Минимум 3 символа').max(20, 'Максимум 20 символов').required('Поле обязательно'),
-  'user-email': yup.string().email('Неккорректный E-mail адрес'),
+  'user-email': yup.string().email('Неккорректный E-mail адрес').required('Обязательное поле'),
   'user-phone': yup.string().min(10, 'Минимум 10 цифр').max(10, 'Максимум 10 цифр').matches(/[0-9]$/i).required('Поле обязательно'),
-  'user-sex': yup.boolean().required('Поле обязательно'),
+  'user-sex': yup.string().oneOf(['male','female'], "Обязательно").required('Обязательное поле'),
   'user-bio': yup.string().max(200, 'Слишком длинно, укоротите до 200 символов'),
-  'user-agree': yup.boolean().required('Поле обязательно'),
+  'user-agree': yup.boolean().oneOf([true], "Вы должны согласиться").required(),
 })
 
 
@@ -68,7 +69,7 @@ const App = () => (
 
         <Formik
           initialValues={registerFormInitialValues}
-          validateOnChange={false}
+          validateOnChange={true}
           validateOnBlur={true}
           //validate={registerFormValidate}
           validationSchema={schema}

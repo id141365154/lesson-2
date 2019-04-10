@@ -39,8 +39,7 @@ const CheckStyled = styled.div`
 
 const HtmlRadio = styled.input`
   position:absolute;
-  left:-9999px;
-  visibility:hidden;
+  opacity:0;
   :checked + div {opacity:1;}
 `
 
@@ -70,7 +69,10 @@ export const RadioField = withTheme(
      disabled,
      onClick,
      onBlur,
-     onFocus }) => {
+     onFocus,
+     onChange
+  }) => {
+
 
       const onClickHandler = (e)=>{
         if (typeof e.target.children[1] !== 'undefined'){
@@ -93,8 +95,15 @@ export const RadioField = withTheme(
     }
 
     const onKeyHandler = (e)=>{
-      if (e.which == 32){ // space
+      if (e.which == 32 && typeof e.target.children[1] !== 'undefined'){ // space
         e.target.children[1].checked = true
+      }
+    }
+
+
+    const onChangeHandler = (e)=>{
+      if (onChange){
+        onChange(e);
       }
     }
 
@@ -109,7 +118,15 @@ export const RadioField = withTheme(
             onKeyPress={onKeyHandler}
           >
             <RadioBox disabled={disabled}/>
-            <HtmlRadio disabled={disabled} name={name} type={"radio"} checked={ value ? value : null }/>
+            <HtmlRadio
+              disabled={disabled}
+              onBlur={onBlur}
+              value={value}
+              name={name}
+              type={"radio"}
+              onChange={onChangeHandler}
+              //checked={ value ? value : null }
+            />
             <Check disabled={disabled}/>
             {labelText}
           </Container>
@@ -129,5 +146,6 @@ RadioField.propTypes = {
   disabled: PropTypes.bool,
   onClick: PropTypes.func,
   onBlur: PropTypes.func,
-  onFocus: PropTypes.func
+  onFocus: PropTypes.func,
+  onChange: PropTypes.func
 }

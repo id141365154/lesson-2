@@ -20,6 +20,8 @@ export const CheckboxWithText = ({
   error,
   tip,
   disabled,
+  onBlur,
+  onChange
 }) => (
   <>
   <Container onClick={typeof children === 'string' ? onPress : undefined}>
@@ -29,6 +31,8 @@ export const CheckboxWithText = ({
       error={error}
       disabled={disabled}
       onPress={typeof children === 'string' ? undefined : onPress}
+      onBlur={onBlur}
+      onChange={onChange}
     />
     <VBox />
     {typeof children === 'string' ? (
@@ -54,6 +58,8 @@ CheckboxWithText.propTypes = {
   value: PropTypes.bool,
   name:PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired,
+  onBlur: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
   error: PropTypes.string,
   tip: PropTypes.string,
   disabled: PropTypes.bool,

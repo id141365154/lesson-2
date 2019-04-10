@@ -10,7 +10,20 @@ const Wrapper = styled.div`
   padding: ${({ theme }) => theme.paddings.main}px;
 `
 
-export const Register = ({values, handleChange, handelBlur, errors, touched})=>{
+export const Register = ({values, handleChange, handelBlur, errors, touched, handelSubmit})=>{
+
+  let valid = false;
+
+  valid = isEmpty(errors) && !isEmpty(touched);
+
+  function isEmpty(obj) {
+    for (let key in obj) {
+      return false;
+    }
+    return true;
+  }
+
+
   return (
     <PageTemplate>
       <Header title="Регистрация" icon={'back'} />
@@ -61,6 +74,10 @@ export const Register = ({values, handleChange, handelBlur, errors, touched})=>{
           <SexField
             name={'user-sex'}
             label={'Пол'}
+            onBlur={handelBlur}
+            onChange={handleChange}
+            error={ touched['user-sex'] ? errors['user-sex'] : false}
+            value={values['user-sex']}
           />
           <HBox />
           <TextareaField
@@ -76,11 +93,18 @@ export const Register = ({values, handleChange, handelBlur, errors, touched})=>{
           <CheckboxWithText
             name={'user-agree'}
             children={'Со всеми условиями согласен вторая строка'}
+            value={values['user-agree']}
+            onChange={handleChange}
+            onBlur={handelBlur}
+            error={ touched['user-agree'] ? errors['user-agree'] : false}
           />
           <HBox />
           <ButtonAccent
             children={'Отправить'}
-            disabled={true}/>
+            disabled={!valid}
+            type={'submit'}
+          />
+
         </Wrapper>
       </Flex1>
     </PageTemplate>

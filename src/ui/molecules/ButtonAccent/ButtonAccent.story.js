@@ -8,6 +8,7 @@ storiesOf('ui/molecules', module).add('ButtonAccent', () => (
   <ButtonAccent
     disabled={boolean('disabled', false)}
     loading={boolean('loading', false)}
+    type={text('submit')}
     onPress={action('press')}
   >
     Button

@@ -19,8 +19,11 @@ export const SexField = withTheme(
     tip,
     disabled,
     name,
+    value,
     label,
     onClick,
+    onChange,
+    onBlur
 
   }) => (
     <FieldContainer>
@@ -30,15 +33,21 @@ export const SexField = withTheme(
           <RadioField
             labelText={'муж.'}
             name={name}
+            value="male"
             disabled={disabled}
             onClick={onClick}
+            onBlur={onBlur}
+            onChange={onChange}
           />
           <VBox width={theme.paddings.double}/>
           <RadioField
             labelText={'жен.'}
             name={name}
+            value='female'
             disabled={disabled}
             onClick={onClick}
+            onBlur={onBlur}
+            onChange={onChange}
           />
       </Row>
       {error
@@ -52,9 +61,11 @@ export const SexField = withTheme(
 SexField.propTypes = {
   label:PropTypes.string,
   name: PropTypes.toString.isRequired,
+  value: PropTypes.oneOf(['male','female']),
   error:PropTypes.bool,
   tip: PropTypes.string,
   disabled: PropTypes.bool,
   onClick: PropTypes.func,
+  onBlur: PropTypes.func,
   onChange: PropTypes.func
 }

@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 import { theme, styled } from '@ui/theme'
 import { ButtonText } from '@ui/atoms/Typography'
 
-const Button = styled('div')`
+const Button = styled('button')`
+  display:block;
+  width:100%;
   background: ${({ loading, theme }) =>
     loading ? theme.pallete.nero : theme.pallete.white};
   border: 2px solid
@@ -21,11 +23,14 @@ const Button = styled('div')`
   border-radius: 4px;
 `
 
-export const ButtonAccent = ({ loading, disabled, children, onPress }) => (
+
+
+export const ButtonAccent = ({ loading, disabled, children, type, onPress }) => (
   <Button
     disabled={disabled}
     loading={loading}
     onClick={loading || disabled ? () => undefined : onPress}
+    type={type}
   >
     {loading ? (
       'load'
@@ -43,5 +48,6 @@ ButtonAccent.propTypes = {
   loading: PropTypes.bool,
   disabled: PropTypes.bool,
   children: PropTypes.string,
+  type: PropTypes.string,
   onPress: PropTypes.func.isRequired,
 }
