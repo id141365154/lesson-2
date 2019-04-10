@@ -6,7 +6,7 @@ import { theme, GlobalStyles, styled, ThemeProvider } from '@ui/theme'
 import { Register } from '@ui/pages'
 
 import { Formik } from 'formik'
-import { string, object } from 'yup';
+import { string, object } from 'yup'
 
 const InnerContainer = styled.div`
   background-color: white;
@@ -14,6 +14,7 @@ const InnerContainer = styled.div`
   max-width: 414px;
 `
 
+/*
 const registerFormValidate = (values) => {
   let errors = {}
   if (!values['user-email']) {
@@ -33,6 +34,7 @@ const registerFormValidate = (values) => {
   }
   return errors
 }
+*/
 
 
 const registerFormInitialValues = {
@@ -44,17 +46,17 @@ const registerFormInitialValues = {
   'user-bio': '',
 }
 
-let yup = require('yup');
+let yup = require('yup')
 
 let schema = yup.object().shape({
   'user-name': yup.string().min(3).max(20).required(),
   'user-surname': yup.string().min(3).max(20).required(),
   'user-email': yup.string().email(),
-  'user-phone': yup.string().min(10).max(10).required(),
+  'user-phone': yup.string().min(10).max(10).matches(/[0-9]$/i).required(),
   'user-sex': yup.boolean().required(),
   'user-bio': yup.string().max(200),
   'user-agree': yup.boolean().required(),
-});
+})
 
 
 const App = () => (
