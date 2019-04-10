@@ -4,18 +4,15 @@ import { Normalize } from 'styled-normalize'
 import { Body2 } from '@ui/atoms/Typography'
 import { theme, GlobalStyles, styled, ThemeProvider } from '@ui/theme'
 import { Register } from '@ui/pages'
+
 import { Formik } from 'formik'
+import { string, object } from 'yup';
 
 const InnerContainer = styled.div`
   background-color: white;
   flex: 1;
   max-width: 414px;
 `
-
-
-const registerFormInitial = {
-  email: '',
-}
 
 const registerFormValidate = (values) => {
   let errors = {}
@@ -37,6 +34,29 @@ const registerFormValidate = (values) => {
   return errors
 }
 
+
+const registerFormInitialValues = {
+  'user-email': '',
+  'user-name': '',
+  'user-surname': '',
+  'user-phone': '',
+  'user-sex': '',
+  'user-bio': '',
+}
+
+let yup = require('yup');
+
+let schema = yup.object().shape({
+  'user-name': yup.string().min(3).max(20).required(),
+  'user-surname': yup.string().min(3).max(20).required(),
+  'user-email': yup.string().email(),
+  'user-phone': yup.string().min(10).max(10).required(),
+  'user-sex': yup.boolean().required(),
+  'user-bio': yup.string().max(200),
+  'user-agree': yup.boolean().required(),
+});
+
+
 const App = () => (
   <InnerContainer>
     <ThemeProvider theme={theme}>
@@ -45,17 +65,11 @@ const App = () => (
         <GlobalStyles/>
 
         <Formik
-          initialValues={{
-            'user-email': '',
-            'user-name': '',
-            'user-surname': '',
-            'user-phone': '',
-            'user-sex': '',
-            'user-bio': '',
-          }}
+          initialValues={registerFormInitialValues}
           validateOnChange={false}
           validateOnBlur={true}
-          validate={registerFormValidate}
+          //validate={registerFormValidate}
+          validationSchema={schema}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
               console.log(values)
