@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { PageTemplate, HBox, Flex1, Divider } from '@ui/atoms'
 import { styled, theme } from '@ui/theme'
 import { Body2 } from '@ui/atoms/Typography'
@@ -9,9 +10,7 @@ const Wrapper = styled.div`
   padding: ${({ theme }) => theme.paddings.main}px;
 `
 
-export const Register = ({values, handleChange, handelBlur, errors})=>{
-  console.log('errors', errors)
-
+export const Register = ({values, handleChange, handelBlur, errors, touched})=>{
   return (
     <PageTemplate>
       <Header title="Регистрация" icon={'back'} />
@@ -22,12 +21,20 @@ export const Register = ({values, handleChange, handelBlur, errors})=>{
             name={'user-name'}
             label={'Ваше имя'}
             placeholder={'Иван'}
+            onChange={handleChange}
+            onBlur={handelBlur}
+            error={ touched['user-name'] ? errors['user-name'] : false}
+            value={values['user-name']}
           />
           <HBox />
           <TextField
             name={'user-surname'}
             label={'Ваша фамилия'}
             placeholder={'Иванов'}
+            onChange={handleChange}
+            onBlur={handelBlur}
+            error={ touched['user-surname'] ? errors['user-surname'] : false}
+            value={values['user-surname']}
           />
           <HBox />
           <TextField
@@ -35,6 +42,10 @@ export const Register = ({values, handleChange, handelBlur, errors})=>{
             label={'Номер телефона'}
             startAdornment={'+7'}
             placeholder={'XXXXXXXXXX'}
+            onChange={handleChange}
+            onBlur={handelBlur}
+            error={ touched['user-phone'] ? errors['user-phone'] : false}
+            value={values['user-phone']}
           />
           <HBox />
           <TextField
@@ -43,7 +54,7 @@ export const Register = ({values, handleChange, handelBlur, errors})=>{
             placeholder={'simple@mail.com'}
             onChange={handleChange}
             onBlur={handelBlur}
-            error={errors['user-email']}
+            error={ touched['user-email'] ? errors['user-email'] : false}
             value={values['user-email']}
           />
           <HBox />
@@ -56,6 +67,10 @@ export const Register = ({values, handleChange, handelBlur, errors})=>{
             name={'user-bio'}
             label={'Немного о себе'}
             placeholder={'Ваше хобби, любимые книги и т.д.'}
+            onChange={handleChange}
+            onBlur={handelBlur}
+            error={ touched['user-bio'] ? errors['user-bio'] : false}
+            value={values['user-bio']}
           />
           <HBox />
           <CheckboxWithText
@@ -70,4 +85,15 @@ export const Register = ({values, handleChange, handelBlur, errors})=>{
       </Flex1>
     </PageTemplate>
   )
+}
+
+
+Register.propTypes = {
+  isSubmiting: PropTypes.bool,
+  handleChange:PropTypes.func,
+  handelBlur:PropTypes.func,
+  errors:PropTypes.object,
+  values:PropTypes.object,
+  touched:PropTypes.object,
+
 }

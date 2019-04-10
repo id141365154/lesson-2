@@ -17,15 +17,22 @@ const registerFormInitial = {
   email: '',
 }
 
-const registerFormValidate = values => {
-  console.log('values', values)
+const registerFormValidate = (values) => {
   let errors = {}
-  if (!values.email) {
-    errors.email = 'Required'
+  if (!values['user-email']) {
+    errors['user-email'] = 'Required'
   } else if (
-    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values['user-email'])
   ) {
-    errors.email = 'Invalid email address'
+    errors['user-email'] = 'Invalid email address'
+  }
+
+  if (!values['user-phone']) {
+    errors['user-phone'] = 'Required'
+  } else if (
+    !/[0-9]$/i.test(values['user-phone'])
+  ) {
+    errors['user-phone'] = 'Invalid phone '
   }
   return errors
 }
@@ -37,24 +44,21 @@ const App = () => (
         <Normalize/>
         <GlobalStyles/>
 
-        <h1>Anywhere in your app!</h1>
         <Formik
-          initialValues={{ 'user-email': 'as', password: '' }}
-          validate={values => {
-            console.log('values', values)
-            let errors = {}
-            if (!values['user-email']) {
-              errors['user-email'] = 'Required'
-            } else if (
-              !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values['user-email'])
-            ) {
-              errors['user-email'] = 'Invalid email address'
-            }
-            return errors
+          initialValues={{
+            'user-email': '',
+            'user-name': '',
+            'user-surname': '',
+            'user-phone': '',
+            'user-sex': '',
+            'user-bio': '',
           }}
+          validateOnChange={false}
+          validateOnBlur={true}
+          validate={registerFormValidate}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
-              alert(JSON.stringify(values, null, 2))
+              console.log(values)
               setSubmitting(false)
             }, 400)
           }}
@@ -75,6 +79,8 @@ const App = () => (
                 handelBlur={handleBlur}
                 errors={errors}
                 values={values}
+                touched={touched}
+                isSubmiting={isSubmitting}
               />
             </form>
           )}
