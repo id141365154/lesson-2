@@ -42,8 +42,8 @@ react-router-modal https://github.com/davidmfoley/react-router-modal
 |3. Подключить formik и yup к 5 экрану | 30 мин | 1 час |
 |- Разобраться как пользоваться | 1 час | 1 час |
 |- Написать схему для формы | 30 мин | 10 мин |
-|- Подключить CheckboxWithText к formic \ Переписать CheckboxWithText | 1 час | |
-|4. При сабмите формы выводить данные формы в консоль | 20 мин | |     
+|- Подключить CheckboxWithText к formic \ Переписать CheckboxWithText | 1 час | 1,5 часа |
+|4. При сабмите формы выводить данные формы в консоль | 20 мин | 1 час |     
     
 
 
